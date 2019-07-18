@@ -49,4 +49,31 @@ export class AuthService {
 		console.log(this.user);
 		return this.user ? this.user.access_token : '';
 	}
+
+	signInRedirect(): Promise<any> {
+		return this.userManager.signinRedirectCallback().then(
+			(user) => {
+				// window.history.replaceState({},
+				// 	window.document.title,
+				// 	window.location.origin);
+				// window.location = "/";
+				console.log(user);
+				// this.router.navigate(['']);
+				this.user = user;
+			},
+			error => {
+				console.error(error);
+			}
+		);
+	}
+
+	refreshUser() {
+		this.userManager.getUser().then(user => {
+			console.log(user);
+			console.log(this);
+			if (user && !user.expired) {
+				this.user = user;
+			}
+		});
+	}
 }

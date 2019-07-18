@@ -35,6 +35,11 @@ export class AppComponent implements OnInit {
 		this.authService.login();
 	}
 
+	logout() {
+		console.log('logout');
+		this.authService.logout();
+	}
+
 	getValues() {
 		this.values = this.httpClient.get('https://localhost:44340/api/values');
 	}
